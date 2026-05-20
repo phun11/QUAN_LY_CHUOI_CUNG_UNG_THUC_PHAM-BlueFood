@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HoneyBee Store</title>
+  <link rel="stylesheet" href="css/honeybee.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#F6B93B">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+</head>
+<body>
+<header class="hb-header">
+  <div class="hb-shell hb-header-inner">
+    <div class="hb-brand"><span class="hb-logo">🏪</span><span>Store Dashboard<small>Nhận hàng, bán hàng và xác thực QR</small></span></div>
+    <a class="hb-btn ghost" href="login.html">Đăng xuất</a>
+  </div>
+</header>
+
+<main class="hb-shell" style="padding:22px 0">
+  <section class="hb-grid">
+    <article class="hb-card hb-col-6">
+      <span class="hb-badge">🧾 POS-ready</span>
+      <h2>Cập nhật trạng thái bán theo QR</h2>
+      <p style="color:var(--hb-muted);line-height:1.5">
+        Store nhập QR token trên tem sản phẩm để đánh dấu <b>đã bán</b> hoặc mở bán lại.
+        Nếu QR đã bán mà sau này bị quét lại trên sản phẩm khác, khách hàng sẽ thấy cảnh báo.
+      </p>
+      <form id="sale-form" style="display:grid;gap:12px;margin-top:14px">
+        <div>
+          <label>QR token</label>
+          <input class="hb-input" name="qrToken" placeholder="Ví dụ: HB-QR-RAU-001-SAFE" required>
+        </div>
+        <div class="hb-grid" style="gap:12px">
+          <div class="hb-col-6">
+            <label>Cửa hàng</label>
+            <input class="hb-input" name="storeId" value="1" type="number">
+          </div>
+          <div class="hb-col-6">
+            <label>Nhân viên</label>
+            <input class="hb-input" name="userId" value="4" type="number">
+          </div>
+        </div>
+        <div>
+          <label>Trạng thái bán</label>
+          <select class="hb-input" name="saleStatus">
+            <option value="SOLD">Đã bán / POS đã thanh toán</option>
+            <option value="NOT_SOLD">Chưa bán / mở lại trên kệ</option>
+            <option value="RETURNED">Hoàn trả / cần kiểm tra lại</option>
+          </select>
+        </div>
+        <div>
+          <label>Ghi chú</label>
+          <textarea class="hb-input" name="note" rows="3" placeholder="Ví dụ: Thanh toán tại quầy POS, hóa đơn #... hoặc cập nhật demo."></textarea>
+        </div>
+        <button class="hb-btn full" type="submit">💾 Lưu trạng thái QR</button>
+        <p id="sale-message" style="margin:0;color:var(--hb-muted)"></p>
+      </form>
+    </article>
+
+    <article class="hb-card hb-col-6 hb-trust warning">
+      <span class="hb-badge warning">🐝 Chống sao chép QR</span>
+      <h2>Vì sao trạng thái bán quan trọng?</h2>
+      <p>
+        Đếm lượt quét chỉ phát hiện rủi ro gián tiếp. Trạng thái <b>đã bán</b> giúp hệ thống biết QR này
+        không nên xuất hiện lại trên sản phẩm khác. Đây là nền tảng để tích hợp POS sau này.
+      </p>
+      <div class="hb-kv">
+        <div><span>QR chưa bán</span><span>Khách quét bình thường</span></div>
+        <div><span>QR đã bán</span><span>Cảnh báo khi quét lại</span></div>
+        <div><span>POS tương lai</span><span>Tự động gọi API</span></div>
+      </div>
+    </article>
+  </section>
+
+  <section class="hb-card" style="margin-top:16px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <div>
+        <h2 style="margin:0">Lô hàng/QR tại cửa hàng</h2>
+        <p style="color:var(--hb-muted);margin:6px 0 0">Chọn nhanh một QR để điền vào form, sau đó đánh dấu đã bán/chưa bán.</p>
+      </div>
+      <button class="hb-btn ghost" id="refresh-btn">↻ Tải lại</button>
+    </div>
+    <div id="store-list" style="margin-top:14px"></div>
+  </section>
+</main>
+<script src="js/api.js"></script>
+<script src="js/store.js"></script>
+<script src="js/pwa.js"></script>
+</body>
+</html>

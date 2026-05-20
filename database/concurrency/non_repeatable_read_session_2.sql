@@ -1,0 +1,3 @@
+-- Non-repeatable Read - Session 2
+UPDATE PRODUCTS SET STATUS = 'FARM_CONFIRMED' WHERE PRODUCT_ID = 1;
+COMMIT;

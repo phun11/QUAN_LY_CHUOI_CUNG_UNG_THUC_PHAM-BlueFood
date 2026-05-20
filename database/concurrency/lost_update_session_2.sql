@@ -1,0 +1,7 @@
+-- Lost Update - Session 2
+SELECT PRODUCT_ID, STATUS, VERSION_NO FROM PRODUCTS WHERE PRODUCT_ID = 1;
+UPDATE PRODUCTS
+SET STATUS = 'CERTIFIED', VERSION_NO = VERSION_NO + 1
+WHERE PRODUCT_ID = 1 AND VERSION_NO = 0;
+-- Nếu SQL%ROWCOUNT = 0 nghĩa là đã phát hiện conflict, không ghi đè update của session khác.
+COMMIT;

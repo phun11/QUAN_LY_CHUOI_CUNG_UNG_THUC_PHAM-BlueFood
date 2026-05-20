@@ -1,0 +1,6 @@
+-- Serializable demo
+-- Dùng cho báo cáo thống kê cần snapshot nhất quán, tránh phantom/non-repeatable read.
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+SELECT COUNT(*) FROM PRODUCTS WHERE STATUS = 'AVAILABLE_FOR_SALE';
+SELECT COUNT(*) FROM QR_SECURITY_ALERTS WHERE RESOLVED_STATUS = 'OPEN';
+COMMIT;

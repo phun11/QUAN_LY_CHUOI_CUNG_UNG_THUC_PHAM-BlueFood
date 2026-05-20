@@ -1,0 +1,6 @@
+-- Non-repeatable Read - Session 1
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+SELECT STATUS FROM PRODUCTS WHERE PRODUCT_ID = 1;
+-- Sang session 2 update + commit, sau đó quay lại chạy dòng dưới.
+SELECT STATUS FROM PRODUCTS WHERE PRODUCT_ID = 1;
+COMMIT;

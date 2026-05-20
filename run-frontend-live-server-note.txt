@@ -1,0 +1,2 @@
+Nếu dùng backend serve static, mở: http://localhost:8080/login.html
+Nếu dùng VS Code Live Server, mở folder frontend và chạy Live Server, rồi chỉnh APP_FRONTEND_BASE_URL nếu cần QR trỏ đúng frontend.

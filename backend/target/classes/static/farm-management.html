@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HoneyBee Farm</title>
+  <link rel="stylesheet" href="css/honeybee.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#F6B93B">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+</head>
+<body>
+<header class="hb-header">
+  <div class="hb-shell hb-header-inner">
+    <div class="hb-brand"><span class="hb-logo">🌱</span><span>HoneyBee Farm<small>Tạo lô hàng, sinh QR và bàn giao vận chuyển</small></span></div>
+    <nav style="display:flex;gap:10px;flex-wrap:wrap"><a class="hb-btn ghost" href="products.html">Lô & QR</a><a class="hb-btn ghost" href="login.html">Đăng xuất</a></nav>
+  </div>
+</header>
+<main class="hb-shell" style="padding:26px 0 36px">
+  <section class="hb-page-head">
+    <div>
+      <span class="hb-badge safe">🌱 FARM ROLE</span>
+      <h1>Quản lý lô hàng nông trại</h1>
+      <p>Farm nhập thông tin sản phẩm/lô hàng. Backend tạo sản phẩm, nguồn gốc, QR token, chữ ký QR, lịch sử trạng thái và audit log trong cùng transaction.</p>
+    </div>
+    <div class="hb-mini-stats" aria-label="Farm quick stats">
+      <div class="hb-mini-stat"><span>Quy trình</span><b>Tạo lô → QR</b></div>
+      <div class="hb-mini-stat"><span>Bảo mật</span><b>Token + Signature</b></div>
+      <div class="hb-mini-stat"><span>DBMS</span><b>Transaction log</b></div>
+    </div>
+  </section>
+
+  <section class="hb-grid">
+    <article class="hb-card hb-col-5">
+      <div class="hb-section-title">
+        <div>
+          <span class="hb-badge safe">➕ NEW BATCH</span>
+          <h2>Tạo lô hàng mới</h2>
+        </div>
+      </div>
+      <p class="hb-note">Nhập đủ thông tin canh tác để người mua có thể truy xuất rõ nguồn gốc khi quét QR.</p>
+      <form id="batch-form" class="hb-form">
+        <label>Tên sản phẩm/lô hàng<input name="productName" required placeholder="VD: Rau cải xanh HoneyBee - Lô mới"></label>
+        <div class="hb-form-row">
+          <label>Loại sản phẩm<input name="category" required placeholder="VD: Rau xanh"></label>
+          <label>Giá demo<input type="number" name="price" value="30000" min="0"></label>
+        </div>
+        <label>Mô tả<textarea name="description" placeholder="Thông tin canh tác, sơ chế, tiêu chuẩn đóng gói..."></textarea></label>
+        <label>Nơi trồng<input name="cultivationPlace" placeholder="VD: Nhà kính A1 - Đà Lạt"></label>
+        <div class="hb-form-row">
+          <label>Ngày gieo trồng<input type="date" name="sowingDate"></label>
+          <label>Ngày thu hoạch<input type="date" name="harvestDate"></label>
+        </div>
+        <label>Quy trình sản xuất<textarea name="productionProcess" placeholder="Gieo trồng, chăm sóc, kiểm tra, đóng gói..."></textarea></label>
+        <button class="hb-btn full" type="submit">+ Tạo lô và sinh QR</button>
+      </form>
+      <p id="farm-msg" style="font-weight:800;color:var(--hb-brown)"></p>
+    </article>
+
+    <article class="hb-card hb-col-7">
+      <div class="hb-section-title">
+        <div>
+          <span class="hb-badge">📦 FARM BATCHES</span>
+          <h2>Lô hàng của nông trại</h2>
+        </div>
+      </div>
+      <p class="hb-note">Sau khi kiểm tra thông tin, bấm <b>Chuyển sang chờ vận chuyển</b> để transporter nhận hàng.</p>
+      <div id="farm-products" class="hb-list"></div>
+    </article>
+  </section>
+</main>
+<script src="js/api.js"></script>
+<script src="js/farms.js"></script>
+<script src="js/pwa.js"></script>
+</body>
+</html>
