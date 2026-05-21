@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HoneyBee Transport</title>
+  <link rel="stylesheet" href="css/honeybee.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#F6B93B">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+</head>
+<body>
+<header class="hb-header">
+  <div class="hb-shell hb-header-inner">
+    <div class="hb-brand"><span class="hb-logo">🚚</span><span>HoneyBee Transport<small>Nhận hàng, giao hàng và ghi lịch sử vận chuyển</small></span></div>
+    <nav style="display:flex;gap:10px;flex-wrap:wrap"><a class="hb-btn ghost" href="scanner.html">Quét QR</a><a class="hb-btn ghost" href="login.html">Đăng xuất</a></nav>
+  </div>
+</header>
+<main class="hb-shell" style="padding:26px 0 36px">
+  <section class="hb-page-head">
+    <div>
+      <span class="hb-badge warning">🚚 TRANSPORT ROLE</span>
+      <h1>Điều phối vận chuyển</h1>
+      <p>Transporter nhận lô từ farm/kho, cập nhật trạng thái vận chuyển, ghi điểm đi - điểm đến - nhiệt độ bảo quản và xác nhận khi hàng tới cửa hàng.</p>
+    </div>
+    <div class="hb-mini-stats" aria-label="Transport quick stats">
+      <div class="hb-mini-stat"><span>Luồng</span><b>Nhận → Giao</b></div>
+      <div class="hb-mini-stat"><span>Lưu vết</span><b>Append history</b></div>
+      <div class="hb-mini-stat"><span>An toàn</span><b>Trace QR</b></div>
+    </div>
+  </section>
+
+  <section class="hb-grid">
+    <article class="hb-card hb-col-7">
+      <div class="hb-section-title">
+        <div>
+          <span class="hb-badge warning">📦 PENDING SHIPMENTS</span>
+          <h2>Lô cần xử lý</h2>
+        </div>
+      </div>
+      <p class="hb-note">Mỗi thao tác gọi API riêng để DBMS khóa dòng, đổi trạng thái hợp lệ và ghi audit log.</p>
+      <div id="shipments" class="hb-list"></div>
+    </article>
+    <article class="hb-card hb-col-5">
+      <div class="hb-section-title">
+        <div>
+          <span class="hb-badge">📜 HISTORY</span>
+          <h2>Lịch sử vận chuyển</h2>
+        </div>
+      </div>
+      <p class="hb-note">Mỗi lần nhận/giao hàng insert một dòng mới, không ghi đè lịch sử cũ.</p>
+      <div id="transport-history"></div>
+    </article>
+  </section>
+</main>
+<script src="js/api.js"></script>
+<script src="js/transport.js"></script>
+<script src="js/pwa.js"></script>
+</body>
+</html>
