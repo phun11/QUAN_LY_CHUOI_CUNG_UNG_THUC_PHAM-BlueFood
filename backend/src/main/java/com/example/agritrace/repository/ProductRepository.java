@@ -59,7 +59,9 @@ public class ProductRepository {
         jdbc.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(
                     "INSERT INTO PRODUCTS(FARM_ID, BATCH_CODE, PRODUCT_NAME, CATEGORY, DESCRIPTION, QUALITY_SUMMARY, PRICE, QUANTITY, UNIT, IMAGE_URL, STATUS) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
-                    Statement.RETURN_GENERATED_KEYS);
+                    new String[]{"PRODUCT_ID"} // Chỉ lấy khóa chính PRODUCT_ID, tránh H2 trả thêm CREATED_AT, UPDATED_AT
+            );
+
             ps.setLong(1, r.farmId);
             ps.setString(2, "HB-BATCH-" + System.currentTimeMillis());
             ps.setString(3, r.productName);
@@ -71,10 +73,11 @@ public class ProductRepository {
             ps.setString(9, "kg");
             ps.setString(10, r.imageUrl);
             ps.setString(11, "CREATED");
+
             return ps;
         }, keyHolder);
 
-        Long productId = keyHolder.getKey().longValue();
+        Long productId = ((Number) keyHolder.getKeys().get("PRODUCT_ID")).longValue();
         jdbc.update("INSERT INTO PRODUCT_ORIGIN(PRODUCT_ID, CULTIVATION_PLACE, SOWING_DATE, HARVEST_DATE, EXPIRED_DATE, PRODUCTION_PROCESS) VALUES(?,?,?,?,?,?)",
                 productId, r.cultivationPlace,
                 r.sowingDate == null ? null : java.sql.Date.valueOf(r.sowingDate),
