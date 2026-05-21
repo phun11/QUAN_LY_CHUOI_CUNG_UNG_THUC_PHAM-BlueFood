@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HoneyBee Scanner</title>
+  <link rel="stylesheet" href="css/honeybee.css" />
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#F6B93B">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+</head>
+<body>
+  <header class="hb-header">
+    <div class="hb-mobile-shell hb-header-inner">
+      <a class="hb-brand" href="index.html"><span class="hb-logo">🐝</span><span>HoneyBee Scanner<small>Kiểm tra sản phẩm trong vài giây</small></span></a>
+      <a class="hb-btn ghost" href="products.html">QR mẫu</a>
+    </div>
+  </header>
+
+  <main class="hb-mobile-shell" style="padding:20px 0 34px">
+    <section class="hb-card" style="text-align:center">
+      <div style="font-size:64px">📷</div>
+      <h1>Quét mã QR</h1>
+      <p style="color:var(--hb-muted)">
+        Chọn ảnh QR từ máy/điện thoại hoặc dùng nút demo bên dưới. Nếu dùng điện thoại cùng Wi-Fi,
+        QR có chứa localhost sẽ tự đổi sang IP hiện tại khi có thể.
+      </p>
+      <input id="qr-file" class="hb-input" type="file" accept="image/*" style="margin:12px 0" />
+      <button id="mock-safe" class="hb-btn full">✅ Mở demo QR an toàn</button>
+      <button id="mock-warn" class="hb-btn ghost full" style="margin-top:10px">⚠️ Mở demo QR nghi ngờ</button>
+      <a class="hb-btn ghost full" style="margin-top:10px" href="products.html">📦 Xem/tải ảnh QR mẫu</a>
+      <p id="scan-message" style="color:var(--hb-muted);margin-bottom:0"></p>
+    </section>
+
+    <section class="hb-card">
+      <label for="manual-token">Nhập token thủ công</label>
+      <input id="manual-token" class="hb-input" placeholder="VD: HB-QR-RAU-001-SAFE" />
+      <button id="manual-go" class="hb-btn secondary full" style="margin-top:10px">Kiểm tra token</button>
+      <div class="hb-kv">
+        <div><span>Token an toàn</span><span>HB-QR-RAU-001-SAFE</span></div>
+        <div><span>Token nghi ngờ</span><span>HB-QR-XOAI-002-WARN</span></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+  <script src="js/scanner.js"></script>
+  <script src="js/pwa.js"></script>
+</body>
+</html>
